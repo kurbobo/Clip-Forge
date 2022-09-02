@@ -24,7 +24,8 @@ ENV PATH=$CONDA_DIR/bin:$PATH
 # RUN virtualenv /home/.virtualenvs/clip_forge_env -p python3.8
 COPY environment.yaml /environment.yaml
 RUN conda env create -f environment.yaml
-RUN conda install --name clip_forge --yes pytorch=1.7.1 torchvision cudatoolkit=11.1 -c pytorch -c conda-forge
+#RUN conda install --name clip_forge --yes pytorch=1.7.1 torchvision cudatoolkit=11.1 -c pytorch -c conda-forge
+RUN conda install pytorch==1.10.0 torchvision==0.11.0 torchaudio==0.10.0 cudatoolkit=11.3 -c pytorch -c conda-forge
 # pip install tensorboard cmake &&\
 # pip install torch==1.10 torchvision==0.11.1 -f https://download.pytorch.org/whl/cu111/torch_stable.html
 SHELL ["/bin/bash", "--login", "-c"]
@@ -35,6 +36,3 @@ chmod 777 /home && \
 chmod 777 /.cache && \
 chmod 777 /root && \
 chmod 777 /.local
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
