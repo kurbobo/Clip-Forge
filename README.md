@@ -99,7 +99,13 @@ To get the optimal results use different threshold values as controlled by the a
 - DreamFields (https://arxiv.org/pdf/2112.01455.pdf)
 - https://arxiv.org/pdf/2203.13333.pdf
 
+## How run this repo in docker
 
+```
+docker build -t clip-forge
+docker run -it --name=clip-forge -u $(id -u):$(id -g) --gpus device=2 -v /scratch/alexander.chukhrov/exps:/exps -v/home/office.tevian.ru/aleksandr.chukhrov/Clip-Forge:/train --shm-size 32G --log-driver=none --cpuset-cpus 24-35 clip-forge
+conda run -n clip_forge  python test_post_clip.py --checkpoint_dir_base "/exps/models/autoencoder" --checkpoint best_iou --checkpoint_nf best --experiment_mode save_voxel_on_query --checkpoint_dir_prior "/exps/models/prior" --text_query "a truck" "a round chair" "a limo" --threshold 0.1 --output_dir "/exps/hello_world"
+```
 
 
 
